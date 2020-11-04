@@ -258,7 +258,7 @@ select(flights, year, month, day)
 # Select all columns between year and day (inclusive)
 select(flights, year:day)
 # Select all columns except those from year to day (inclusive)
-select(flights, -(year:day))
+select(flights, -(year:day))                                 
 ```
 
 There are a number of helper functions you can use within `select()`:
@@ -895,3 +895,9 @@ Functions that work most naturally in grouped mutates and filters are known as  
 
 1.  For each plane, count the number of flights before the first delay 
     of greater than 1 hour.
+
+
+```{python}
+1+1
+```
+

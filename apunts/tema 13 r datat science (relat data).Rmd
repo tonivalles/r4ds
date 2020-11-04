@@ -1,0 +1,74 @@
+---
+title: "nycflights13"
+author: "Toni Vallès"
+date: "4/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Keys
+
+```{r}
+flights %>%
+  count(year, month, day, hour, tailnum) %>%
+  filter(n>1)
+```
+
+# Mutating Joints
+es un lenguaje de preguntas
+
+```{r}
+x= tibble(key=c(1,2,3),val_x=c("x1","x2","x3"))
+y= tibble(key=c(1,2,4),val_x=c("y1","y2","y3"))
+x
+y
+```
+### inner join 
+deja las variables iguales en la tabla. Hace la intersección.
+
+```{r}
+x%>%
+  inner_join(y, by="key")
+```
+
+### outer joins 
+los que no coinciden si left(conserva el de la izq), right (dcha), full (todos)
+
+# Filtering joints
+semi_join (deja las obs de x que esten en y)
+anti_join(quita las obs de x que esten en y)
+
+```{r}
+top_dest <- flights %>%
+  count(dest, sort=TRUE) %>%
+  head(10)
+top_dest
+top_dest$dest
+"ATL" %in% top_dest$dest
+"PMI" %in% top_dest$dest
+"BCN" %in% top_dest$dest
+"JFK" %in% top_dest$dest
+```
+
+ahora sacamos los vuelos que sacan los 10 top destinos:
+
+```{r}
+flights %>%
+  semi_join(top_dest)
+```
+
+#Set operations
+intersect: muestra las variable iguales
+union: aparecen todos sin duplicar los que estan en ambas tablas
+setdiff (tabla1,tabla2) : muestra los valores distintos
+
+
+
+
+
+
+
